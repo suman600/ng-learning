@@ -1,0 +1,114 @@
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" routerLink="/home">Home</a>
+    <span class="breadcrumb-item active">Quizz </span>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- quiz page -->
+        <div class="col-8 offset-md-2">
+            <div class="quiz-page">
+                <h4 class="text-center mb-4"><span>{{quizQuestions['typeOfQuestion']['name']}}</span></h4>
+                <div class="card mb-3">
+                    <div class="card-header bg-light text-dark">
+                        <h5>Question No. {{currentQuestionNo}}</h5> {{quizQuestions['name']}}
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group m-0 p-0">
+                            <li class="list-group-item" *ngFor="let option of quizzQuestionOptions"
+                                (click)="questionAnsweredFun($event,option.name,option.id)">
+                                <label for="{{quizQuestions['id']}}+{{option['id']}}" class="w-100 cursor-pointer">
+                                    <input type="radio" name="{{quizQuestions['id']}}"
+                                        id="{{quizQuestions['id']}}+{{option['id']}}" value="{{quizQuestions['id']}}">
+                                    {{option.name}}
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <div class="row">
+                            <div class="col-5">
+                                <button class="pull-left btn btn-warning w-100"
+                                    [ngClass]="{disabled: (currentQuestionIndex <= 0)}"
+                                    (click)="previousQuestionFun()">Previous</button>
+                            </div>
+                            <div class="col-5 offset-2 mb-4 ">
+                                <button class="pull-right btn btn-success w-100"
+                                    [ngClass]="{disabled: (currentQuestionIndex >= 9)}"
+                                    (click)="nextQuestionFun()">Save & Next</button>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn-block btn btn-primary" (click)="submitQuizzFun()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div *ngFor="let q of allQuizzQns; let i = index" [attr.data-index]="i">
+                    <h4 class="text-center mb-4"><span>{{q['typeOfQuestion']['name']}}</span></h4>
+                    <div class="card mb-3">
+                        <div class="card-header bg-light text-dark">
+                            <h5>Question No. {{i + 1}}</h5>{{q.name}}
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group m-0 p-0">
+                                <li class="list-group-item" *ngFor="let opt of q['options']">
+                                    <label for="{{opt.id}}+{{q.id}}" class="w-100 cursor-pointer">
+                                        <input type="radio" name="{{q.id}}" id="{{opt.id}}+{{q.id}}"
+                                            value="{{opt.id}}">{{opt.name}}
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <div class="row">
+                                <div class="col-5">
+                                    <button class="pull-left btn btn-warning w-100"
+                                        [ngClass]="{disabled: (i+1 == 1)}">Previous</button>
+                                </div>
+                                <div class="col-5 offset-2 mb-4 ">
+                                    <button class="pull-right btn btn-success w-100"
+                                        [ngClass]="{disabled: (i+1 == 10)}">Next</button>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn-block btn btn-primary" (click)="submitQuizzFun()">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <!-- Quiz result page -->
+    <!--        
+        <div class="col-10 offset-md-1" *ngIf="resultQuizz">
+            <div class="result-page">
+                <div class="card-header">
+                    <h5>Your Quizz Status</h5>
+                </div>
+                <div class="result-body card-body">
+                    <div *ngFor="let q of quizListArry; let i = index" [attr.data-index]="i">
+                        <p>{{totalCorrectAns}} : Answer Correct </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <h6>QNo. {{i + 1}}</h6>
+                            </div>
+                            <div class="col-10">
+                                <p>{{q['name']}}</p>
+                                <ul class="list-group m-0 p-0 mb-5">
+                                    <li class="list-group-item" *ngFor="let option of q['options']">
+                                        {{option['name']}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button class="btn btn-primary w-25" (click)="startNextQuizzFun()">Next Quizz</button>
+                </div>
+            </div>
+        </div>
+ -->
+    </div>
+</div>

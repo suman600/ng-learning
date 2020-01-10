@@ -1,0 +1,21 @@
+.main-wrapper{
+    position: relative; 
+    min-height: calc(100vh - 60px);
+}
+.side-bar-wrapper{
+    position: absolute;
+    width: 210px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: black;
+    height: calc(100vh - 56px);
+}
+.main-wrapper:not(.hide-sidebar) .main-body-wrapper{
+    position: relative;
+    width: calc(100vw - 210px);
+    float: right;
+    height: calc(100vh - 56px);
+    overflow: auto;
+}
+

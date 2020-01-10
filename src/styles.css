@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+.cursor-pointer{
+    cursor: pointer;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.instruction-body,.result-body{
+    overflow: auto;
+    height: calc(100vh - 260px);
+}
+.no-radius{
+    border-radius: 0 !important;
+}

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid pd-0">
+    <a class="navbar-brand" href="JavaScript:Void(0)">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarNavDropdown" class="navbar-collapse collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a href class="nav-link" dropdownToggle (click)="false" id="manage" aria-controls="manage-dropdown">Manage <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+          <div class="dropdown-menu" *dropdownMenu aria-labelledby="manage" id="manage-dropdown">
+            <a class="dropdown-item" href (click)="false">User</a>
+            <a class="dropdown-item" href (click)="false">Profile</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a href class="nav-link" dropdownToggle (click)="false" id="demo" aria-controls="demo-dropdown">Demo <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+          <div class="dropdown-menu" *dropdownMenu aria-labelledby="demo" id="demo-dropdown">
+            <a class="dropdown-item" [routerLink]="['/quiz-instruction']">Quiz App</a>
+            <a class="dropdown-item" href (click)="false">Todo App</a>
+            <a class="dropdown-item" href (click)="false">Quizz App</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav" dropdown>
+        <li class="nav-item dropdown">
+          <a href class="nav-link" dropdownToggle (click)="false" id="userProfile" aria-controls="userProfile-dropdown">
+            {{logged_User}} <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu" *dropdownMenu aria-labelledby="userProfile" id="userProfile-dropdown">
+            <a class="dropdown-item" [routerLink]="['/account-settings']">Account</a>
+            <a class="dropdown-item" href (click)="logOut()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</nav>
