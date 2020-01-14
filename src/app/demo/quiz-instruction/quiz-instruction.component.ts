@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router, Routes } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-quiz-instruction',
   templateUrl: './quiz-instruction.component.html',
-  styleUrls: ['./quiz-Instruction.component.css']
+  styleUrls: ['./quiz-instruction.component.css']
 })
 export class QuizInstructionComponent implements OnInit {
 
