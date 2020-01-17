@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from './services/quiz.service';
-import { Quiz, QuizConfig, Option, Question, AnswerKey } from './models/index'
+import { QuizService } from '../shared/services/quiz.service';
+import { Quiz, QuizConfig, Option, Question, AnswerKey } from '../shared/models/index'
 import { AngularFireList } from 'angularfire2/database';
 import { Router } from "@angular/router";
 
