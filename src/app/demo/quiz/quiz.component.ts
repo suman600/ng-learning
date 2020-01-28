@@ -17,14 +17,12 @@ export class QuizComponent implements OnInit {
   quizQuestions: Question[];
   quizzQuestionOptions: Option[];
   totalCorrectAns: number = 0;
-
   quizLength: number;
   currentQuestionNo: number = 0;
-
   selectedOption: any;
   correctAnswer: boolean;
   questionAnswerKey: number;
-  
+
 
 
   constructor(
@@ -38,8 +36,10 @@ export class QuizComponent implements OnInit {
       console.log(this.quizListArry);
       this.updateQuizFun();
     })
+
     console.log(this.quizListArry);
   }
+
 
   updateQuizFun() {
     this.quizQuestions = this.quizListArry[this.currentQuestionIndex];
@@ -51,36 +51,35 @@ export class QuizComponent implements OnInit {
     //     ++this.totalCorrectAns;
     //   }
     // }
+
   }
 
   nextQuestionFun() {
-    if (this.currentQuestionIndex < this.quizLength) {
+    if (this.currentQuestionNo < this.quizLength) {
       ++this.currentQuestionIndex;
       this.updateQuizFun();
     } else {
       return false;
-    }
 
+    }
   }
 
   previousQuestionFun() {
-    if (this.quizLength > this.currentQuestionIndex) {
+    if (this.currentQuestionNo > 1) {
       --this.currentQuestionIndex;
       this.updateQuizFun();
     }
-
   }
 
   // =======================================================
   questionAnsweredFun(e: any, option: any) {
-
     if (e.target.checked) {
       this.selectedOption = option;
       if (option.id == this.questionAnswerKey) {
         option.correctAnswer = true;
         //option.inCorrectAnswer = false;
         ++this.totalCorrectAns;
-        
+
       } else {
         //option.inCorrectAnswer = true;
         option.correctAnswer = false;

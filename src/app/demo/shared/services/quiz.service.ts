@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 
 
 export class QuizService implements OnInit {
-  
+
 
   private totalCorrectAnswer = new BehaviorSubject<number>(1);
   updateTotalCorrectAnswer = this.totalCorrectAnswer.asObservable();
@@ -15,14 +15,14 @@ export class QuizService implements OnInit {
     this.totalCorrectAnswer.next(_totalCorrectAnswer)
   }
 
-  constructor( private db: AngularFireDatabase ) { }
+  constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
 
   }
 
-  getAllQuestionList():Observable<any> {
-   return this.db.list<any>('/questions').valueChanges();
+  getAllQuestionList(): Observable<any> {
+    return this.db.list<any>('/questions').valueChanges();
   }
 
 }
