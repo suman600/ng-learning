@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../shared/services/quiz.service';
-import { Quiz, QuizConfig, Option, Question, AnswerKey } from '../shared/models/index'
+import { Quiz, Option, Question } from '../shared/models/quiz'
 import { AngularFireList } from 'angularfire2/database';
 import { Router } from "@angular/router";
 
@@ -12,49 +12,59 @@ import { Router } from "@angular/router";
 
 export class QuizComponent implements OnInit {
 
-  quizListArry: AngularFireList<any>;
+  quizListArry: any;
   currentQuestionIndex: number = 0;
   quizQuestions: Question[];
   quizzQuestionOptions: Option[];
   totalCorrectAns: number = 0;
-  currentQuestionNo: number;
-  answerkey: AnswerKey[] = [];
+
+  quizLength: number;
+  currentQuestionNo: number = 0;
+
+  selectedOption: any;
+  correctAnswer: boolean;
+  questionAnswerKey: number;
+  
+
 
   constructor(
-    private quizService: QuizService,
-    private router: Router
-  ) { }
+    private quizService: QuizService, private router: Router) {
+  }
 
   ngOnInit() {
-    this.quizService.getAllQuestionList().subscribe((res: any) => {
+    this.quizService.getAllQuestionList().subscribe(res => {
       this.quizListArry = res;
-    });
-    this.updateQuizFun();
-    
+      this.quizLength = this.quizListArry.length;
+      console.log(this.quizListArry);
+      this.updateQuizFun();
+    })
+    console.log(this.quizListArry);
   }
 
   updateQuizFun() {
     this.quizQuestions = this.quizListArry[this.currentQuestionIndex];
     this.quizzQuestionOptions = this.quizListArry[this.currentQuestionIndex]['options'];
+    this.questionAnswerKey = this.quizListArry[this.currentQuestionIndex]['ansKey']
     this.currentQuestionNo = this.currentQuestionIndex + 1;
-
-    for (let i = 0; i < this.answerkey.length; i++) {
-      if (this.answerkey[i].id == this.quizListArry[this.currentQuestionIndex]['ansKey']) {
-        ++this.totalCorrectAns;
-      }
-    }
+    // for (let i = 0; i < this.answerkey.length; i++) {
+    //   if (this.answerkey[i]['ans_id'] == this.quizListArry[this.currentQuestionIndex]['ansKey']) {
+    //     ++this.totalCorrectAns;
+    //   }
+    // }
   }
 
   nextQuestionFun() {
-    if (this.currentQuestionIndex < 9) {
+    if (this.currentQuestionIndex < this.quizLength) {
       ++this.currentQuestionIndex;
       this.updateQuizFun();
+    } else {
+      return false;
     }
 
   }
 
   previousQuestionFun() {
-    if (this.currentQuestionIndex > 0) {
+    if (this.quizLength > this.currentQuestionIndex) {
       --this.currentQuestionIndex;
       this.updateQuizFun();
     }
@@ -62,14 +72,21 @@ export class QuizComponent implements OnInit {
   }
 
   // =======================================================
-  questionAnsweredFun(e: any, name: String, id: number) {
+  questionAnsweredFun(e: any, option: any) {
+
     if (e.target.checked) {
-      this.answerkey.push(new AnswerKey(name, id));
+      this.selectedOption = option;
+      if (option.id == this.questionAnswerKey) {
+        option.correctAnswer = true;
+        //option.inCorrectAnswer = false;
+        ++this.totalCorrectAns;
+        
+      } else {
+        //option.inCorrectAnswer = true;
+        option.correctAnswer = false;
+        --this.totalCorrectAns;
+      }
     }
-    else {
-      this.answerkey.splice(0, 1);
-    }
-    console.log(this.answerkey);
   }
 
   submitQuizzFun() {

@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-8 offset-md-2">
-            <div class="quiz-page">
+            <div class="quiz-page" *ngIf="quizQuestions">
                 <h4 class="text-center mb-4"><span>{{quizQuestions['typeOfQuestion']['name']}}</span></h4>
                 <div class="card mb-3">
                     <div class="card-header bg-light text-dark">
@@ -14,12 +14,17 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group m-0 p-0">
-                            <li class="list-group-item" *ngFor="let option of quizzQuestionOptions"
-                                (click)="questionAnsweredFun($event,option.name,option.id)">
-                                <label for="{{quizQuestions['id']}}+{{option['id']}}" class="w-100 cursor-pointer">
+                                <li class="list-group-item"
+                                *ngFor="let option of quizzQuestionOptions"
+                                [ngClass]="{
+                                'active': selectedOption == option,
+                                'list-group-item-success': selectedOption == option && option.correctAnswer == true,
+                                'list-group-item-danger': selectedOption == option && option.correctAnswer == false}"
+                                (click)="questionAnsweredFun($event,option)">
+                                <label for="{{quizQuestions['id']+option['id']}}" class="w-100 cursor-pointer">
                                     <input type="radio" name="{{quizQuestions['id']}}"
-                                        id="{{quizQuestions['id']}}+{{option['id']}}" value="{{quizQuestions['id']}}">
-                                    {{option.name}}
+                                        id="{{quizQuestions['id']+option['id']}}" value="{{quizQuestions['id']}}">
+                                    {{option.name}} {{option.id}}
                                 </label>
                             </li>
                         </ul>
@@ -28,13 +33,13 @@
                         <div class="row">
                             <div class="col-5">
                                 <button class="pull-left btn btn-warning w-100"
-                                    [ngClass]="{disabled: (currentQuestionIndex <= 0)}"
-                                    (click)="previousQuestionFun()">Previous</button>
+                                        [ngClass]="{disabled: (currentQuestionNo  <= 1)}"
+                                        (click)="previousQuestionFun()">Previous</button>
                             </div>
                             <div class="col-5 offset-2 mb-4 ">
                                 <button class="pull-right btn btn-success w-100"
-                                    [ngClass]="{disabled: (currentQuestionIndex >= 9)}"
-                                    (click)="nextQuestionFun()">Save & Next</button>
+                                        [ngClass]="{disabled: (currentQuestionNo >= quizLength)}"
+                                        (click)="nextQuestionFun()">Save & Next</button>
                             </div>
                             <div class="col-12">
                                 <button class="btn-block btn btn-primary" (click)="submitQuizzFun()">Submit</button>
